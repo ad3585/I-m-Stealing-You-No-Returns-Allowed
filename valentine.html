@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Be My Valentine?</title>
+
+<style>
+body {
+    background-color: #ffe6f2;
+    text-align: center;
+    font-family: Arial;
+    padding-top: 80px;
+}
+
+.box {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    width: 60%;
+    margin: auto;
+}
+
+button {
+    padding: 10px 25px;
+    margin: 10px;
+    font-size: 18px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+#yes {
+    background-color: #ff4d94;
+    color: white;
+}
+
+#no {
+    background-color: lightgray;
+    position: absolute;
+}
+
+.note {
+    font-size: 12px;
+    color: gray;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="box">
+    <h1>🐱❤️</h1>
+
+    <h2 id="question">Nidhuuu [JOE], will you be my Valentine?</h2>
+
+    <button id="yes" onclick="yesClick()">Yes</button>
+    <button id="no" onmouseover="moveNo()">No</button>
+
+    <p class="note">"No" seems a bit shy 😅</p>
+</div>
+
+<script>
+function yesClick() {
+    alert("Yay! I knew you'd say YES ❤️🥰");
+}
+
+function moveNo() {
+    var x = Math.random() * window.innerWidth * 0.7;
+    var y = Math.random() * window.innerHeight * 0.7;
+
+    document.getElementById("no").style.left = x + "px";
+    document.getElementById("no").style.top = y + "px";
+}
+</script>
+
+</body>
+</html>
