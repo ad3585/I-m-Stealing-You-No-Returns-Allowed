@@ -1,31 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Be My Valentine?</title>
+<title>For My Special Person 💖</title>
 
 <style>
 body {
-    background-color: #ffe6f2;
+    background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
     text-align: center;
     font-family: Arial;
-    padding-top: 80px;
+    overflow: hidden;
 }
 
 .box {
     background: white;
     padding: 30px;
-    border-radius: 20px;
-    width: 60%;
+    border-radius: 25px;
+    width: 70%;
     margin: auto;
+    margin-top: 60px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    position: relative;
+    z-index: 10;
 }
 
 button {
-    padding: 10px 25px;
+    padding: 12px 30px;
     margin: 10px;
-    font-size: 18px;
+    font-size: 20px;
     border-radius: 10px;
     border: none;
     cursor: pointer;
+    transition: 0.3s;
 }
 
 #yes {
@@ -38,9 +43,68 @@ button {
     position: absolute;
 }
 
-.note {
-    font-size: 12px;
-    color: gray;
+.heart {
+    position: absolute;
+    color: red;
+    font-size: 24px;
+    animation: float 6s infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-800px); opacity: 0; }
+}
+
+#message {
+    font-size: 18px;
+    color: #ff3366;
+    margin-top: 20px;
+    min-height: 40px;
+}
+
+#slideshow img {
+    width: 200px;
+    height: 200px;
+    border-radius: 20px;
+    margin-top: 15px;
+    display: none;
+}
+
+/* POPUP STYLE */
+#popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.4);
+    text-align: center;
+    z-index: 100;
+}
+
+#popup h2 {
+    color: #ff3366;
+}
+
+#popup .rose {
+    font-size: 80px;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+#closeBtn {
+    margin-top: 15px;
+    background: #ff4d94;
+    color: white;
+    padding: 10px 20px;
 }
 </style>
 
@@ -49,31 +113,131 @@ button {
 <body>
 
 <div class="box">
-    <h1>🐱❤️</h1>
+    <h1>🌹 To The Most Special Girl 🌹</h1>
 
-    <h2 id="question">Nidhuuu [JOE], will you be my Valentine?</h2>
+    <h2 id="question"></h2>
 
-    <button id="yes" onclick="yesClick()">Yes</button>
-    <button id="no" onmouseover="moveNo()">No</button>
+    <div id="slideshow">
+        <img src="love.jpeg">
+        <img src="love2.jpeg">
+        <img src="love4.jpeg">
+        <img src="love6.jpeg">
+        <img src="love8.jpeg">
+    </div>
 
-    <p class="note"> Pleaweseeeeeee Bbyyy SAY NO 😅</p>
+    <button id="yes" onclick="yesClick()">Yes, Forever 💘</button>
+    <button id="no" onmouseover="moveNo()">No 😅</button>
+
+    <p id="message"></p>
 </div>
 
+<!-- CUSTOM ROSE POPUP -->
+<div id="popup">
+    <div class="rose">🌹</div>
+    <h2>AMOR YOU ARE MINE FOREVER 💋🫀🫂🧿🎀🪄💜❤️</h2>
+    <button id="closeBtn" onclick="closePopup()">Okay My Love 💖</button>
+</div>
+
+<audio id="music" loop>
+    <source src="gehra_hua.mpeg" type="audio/mpeg">
+</audio>
+
 <script>
-function yesClick() {
-    alert( "AMOR YOU ARE MINE 💋🫀🫂🧿🎀🪄💜❤️🪻💐🌻🌹👅😘");
+
+var text = "Nidhuuu [JOE], you are the best thing that ever happened to me... Will you be my Valentine? 💖";
+var index = 0;
+
+function typeEffect() {
+    if (index < text.length) {
+        document.getElementById("question").innerHTML += text.charAt(index);
+        index++;
+        setTimeout(typeEffect, 50);
+    }
 }
 
+typeEffect();
+
+function createHearts() {
+    var heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.top = window.innerHeight + "px";
+    heart.style.fontSize = Math.random() * 30 + 10 + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 6000);
+}
+
+setInterval(createHearts, 300);
+
 function moveNo() {
-    var x = Math.random() * window.innerWidth * 0.7;
-    var y = Math.random() * window.innerHeight * 0.7;
+    var x = Math.random() * window.innerWidth * 0.8;
+    var y = Math.random() * window.innerHeight * 0.8;
 
     document.getElementById("no").style.left = x + "px";
     document.getElementById("no").style.top = y + "px";
+
+    var yes = document.getElementById("yes");
+    yes.style.fontSize = (parseInt(window.getComputedStyle(yes).fontSize) + 3) + "px";
 }
+
+var messages = [
+    "You make my world brighter 💫",
+    "You are my peace 🌸",
+    "My happiest place is with you 💞",
+    "I choose you, always 💖",
+    "You are my favorite person on earth 🌍"
+];
+
+var msgIndex = 0;
+
+setInterval(function(){
+    document.getElementById("message").innerHTML = messages[msgIndex];
+    msgIndex = (msgIndex + 1) % messages.length;
+}, 3000);
+
+function yesClick() {
+    document.getElementById("music").play();
+    document.getElementById("popup").style.display = "block";
+    startConfetti();
+}
+
+function closePopup() {
+    document.getElementById("popup").style.display = "none";
+}
+
+var slide = 0;
+var images = document.querySelectorAll("#slideshow img");
+
+function showSlides() {
+    for (var i = 0; i < images.length; i++) {
+        images[i].style.display = "none";
+    }
+    slide++;
+    if (slide > images.length) slide = 1;
+
+    images[slide - 1].style.display = "block";
+    setTimeout(showSlides, 2000);
+}
+
+showSlides();
+
+function startConfetti() {
+    for (let i = 0; i < 100; i++) {
+        let conf = document.createElement("div");
+        conf.innerHTML = "💖";
+        conf.style.position = "absolute";
+        conf.style.left = Math.random() * window.innerWidth + "px";
+        conf.style.top = Math.random() * window.innerHeight + "px";
+        conf.style.fontSize = "24px";
+        document.body.appendChild(conf);
+    }
+}
+
 </script>
 
 </body>
 </html>
-
-
